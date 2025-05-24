@@ -29,6 +29,6 @@ production:
   pool: 5
   encoding: unicode
 
-  cable:
-      url: <%= ENV["DATABASE_URL"] %>
-      adapter: postgresql
+cable:
+  url: <%= ENV["DATABASE_URL"] %>
+  adapter: postgresql
