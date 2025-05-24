@@ -27,3 +27,4 @@ production:
   url: <%= ENV['postgresql://alpha_blog_mpzq_user:iQCxeh7WIW52REWO0EuSvRx6v2t1xzsT@dpg-d0opa73e5dus73d3v2og-a/alpha_blog_mpzq'] %>
   adapter: postgresql
   pool: 5
+  encoding: unicode
