@@ -1,0 +1,9 @@
+<% Rails.logger.debug "Validation errors: #{flash.inspect} " %>
+
+    <% flash.each do |name,msg| %>
+      <ul>
+        <li>
+          <%= msg %>
+        </li>
+      </ul>
+    <% end %>
