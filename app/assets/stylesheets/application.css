@@ -8,4 +8,16 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
- 
+
+.navbar {
+  background-color: #4CAF50 !important;  /* Green background */
+}
+
+#logo{
+  float: left;
+  font-size: 1.7em;
+  color:#fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}

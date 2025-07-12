@@ -8,4 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
-@import "bootstrap/scss/bootstrap";
+
+.navbar {
+  background-color: #4CAF50 !important;  /* Green background */
+}
