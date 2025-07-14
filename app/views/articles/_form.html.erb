@@ -9,20 +9,35 @@
 </ul>
 <% end %>
 
-<%= form_with model: @article, local: true do |f| %>
-    <p>
-        <%= f.label :title %> <br/>
-        <%= f.text_field :title %>
-    </p>
-    <p>
-        <%= f.label :description %> <br/>
-        <%= f.text_area :description %>
-    </p>
-    <p>
-        <%= f.submit %> 
-    </p>
+<div class='row'>
+    <div class="col-xs-12">
+
+<%= form_with model: @article, local: true, html: { class: "row g-3 my-4" } do |f| %>
+  <div class="mb-3 row">  
+    <%= f.label :title, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :title, class: "form-control", placeholder: "Title of Article", autofocus: true %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <%= f.label :description, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-8">
+      <%= f.text_area :description, rows:10, class: "form-control" %>
+    </div>
+  </div>
+
+  <!-- Submit button aligned with input fields -->
+  <div class="mb-3 row">
+    <div class="offset-sm-2 col-sm-8">
+      <%= f.submit %> 
+    </div>
+  </div>
 <% end %>
 
-<p>
-    <%= link_to "Home", articles_path %>
-</p>
+<div class="col-4 offset-4 text-center mb-2">
+    [<%= link_to "Return Home", articles_path %>]
+</div>
+
+    </div>
+</div>

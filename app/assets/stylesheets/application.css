@@ -21,3 +21,22 @@
   letter-spacing: -1px;
   font-weight: bold;
 }
+
+#hero-section {
+  background-image: url("pexels-pedro.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 550px;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #ffc107 !important; /* Yellow color on hover */
+}
+
