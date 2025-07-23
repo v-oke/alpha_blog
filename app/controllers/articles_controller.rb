@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:edit,:destroy,:update,:show]
+  before_action :set_article, only: [ :edit, :destroy, :update, :show ]
 
   def index
     @articles = Article.all
@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
-      flash[:notice] = "Article was successfully saved"
+      flash[:success] = "Article was successfully saved"
       redirect_to article_path(@article)
     else
       Rails.logger.debug "Validation errors: #{@article.errors.full_messages.inspect}"
@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update(article_params)
-      flash[:notice] = "Article was successfully Updated"
+      flash[:success] = "Article was successfully Updated"
       redirect_to article_path(@article)
     else
       Rails.logger.debug "Validation errors: #{@article.errors.full_messages.inspect}"
@@ -38,9 +38,18 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
-    flash[:notice] = "Article was successfully Deleted"
-    redirect_to articles_path
+      @article.destroy
+      respond_to do |format|
+      format.turbo_stream do
+        flash.now[:alert] = "Article was successfully Deleted"
+        render turbo_stream: turbo_stream.replace("flash", partial: "layouts/messages")
+      end
+
+      format.html do
+        flash[:alert] = "Article was successfully Deleted"
+        redirect_to articles_path
+      end
+    end
   end
 
   private

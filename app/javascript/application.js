@@ -3,5 +3,7 @@
 //= require jquery
 //= require jquery-ui
 
+import "@hotwired/turbo-rails"
+
 
 
