@@ -37,11 +37,24 @@
     <%= render 'layouts/navigation' %>
     <%= render 'layouts/messages' %> 
 
-    <div class="container">
+    <div class="container mb-10">
       <%= yield %>
     </div>
     
     <%= render 'layouts/footer' %>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const flashMessage = document.getElementById('flash');
+      if (flashMessage) {
+        setTimeout(() => {
+          flashMessage.style.transition = 'opacity 0.5s ease';
+          flashMessage.style.opacity = '0';
+          setTimeout(() => flashMessage.remove(), 500); // Remove from DOM after fade out
+        }, 4000); // Adjust time (ms) before fade starts (e.g., 4000ms = 4s)
+      }
+    });
+  </script>
 
   </body>
 </html>

@@ -38,18 +38,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-      @article.destroy
-      respond_to do |format|
-      format.turbo_stream do
-        flash.now[:alert] = "Article was successfully Deleted"
-        render turbo_stream: turbo_stream.replace("flash", partial: "layouts/messages")
-      end
-
-      format.html do
-        flash[:alert] = "Article was successfully Deleted"
-        redirect_to articles_path
-      end
-    end
+    @article.destroy
+    flash[:alert] = "Article was successfully Deleted"
+    #redirect_to articles_path
   end
 
   private
