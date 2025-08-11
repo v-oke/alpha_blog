@@ -11,6 +11,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user = User.first
+    debugger
     if @article.save
       flash[:success] = "Article was successfully saved"
       redirect_to article_path(@article)
@@ -40,7 +42,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     flash[:alert] = "Article was successfully Deleted"
-    #redirect_to articles_path
+    # redirect_to articles_path
   end
 
   private
