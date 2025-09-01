@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
-  
+  before_action :set_user, only: [ :edit, :destroy, :update, :show ]
+
   def new
     @user = User.new
   end
 
-  def create 
+  def create
+    debugger
     @user = User.new(user_params)
 
     if @user.save
@@ -16,9 +18,33 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    # debugger
+    if @user.update(user_params)
+      flash[:success] = "User was successfully Updated"
+      redirect_to edit_user_path(@user)
+    else
+      Rails.logger.debug "Validation errors: #{@user.errors.full_messages.inspect}"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+  end
+
+  def destroy
+  end
+
+  def show
+  end
+
   private
+
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
 
+  def set_user
+      @user = User.find(params[:id])
+  end
 end
