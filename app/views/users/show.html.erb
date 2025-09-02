@@ -6,4 +6,12 @@
     </div>
   </div>
 
-<%= render 'articles/article', obj: @user.articles %>
+<h4 align="center" style="mt-3"><%= @user.username %>'s Articles</h4>
+
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @user_articles %>
+</div>
+<%= render 'articles/article', obj: @user_articles %>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @user_articles %>
+</div>
