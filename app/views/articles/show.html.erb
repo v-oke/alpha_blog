@@ -11,6 +11,12 @@
     <!-- Card Body -->
     <div class="card-body">
       <p class="card-text"><%= @article.description %></p>
+
+      <% if @article.user %>
+      <small>By 
+                <%= link_to  @article.user.username, user_path(@article.user)  %>, <%= time_ago_in_words(@article.created_at) %> ago
+      </small>
+      <% end %>
     </div>
 
     <!-- Card Footer with Buttons on Lower-Left -->

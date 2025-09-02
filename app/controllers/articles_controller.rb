@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user = User.first
-    debugger
+    #debugger
     if @article.save
       flash[:success] = "Article was successfully saved"
       redirect_to article_path(@article)
