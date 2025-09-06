@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [ :edit, :destroy, :update, :show ]
-  before_action :require_user, except: [ :index, :show ]
+  before_action :require_user, except: [ :index, :new, :create, :show ]
   before_action :require_same_user, only: [ :edit, :update, :destroy ]
 
   def index
@@ -16,8 +16,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Welcome to Alpha Blog #{@user.username}"
-      redirect_to articles_path
+      redirect_to user_path(@user)
     else
       Rails.logger.debug "Validation errors: #{@user.errors.full_messages.inspect}"
       render :new, status: :unprocessable_entity
