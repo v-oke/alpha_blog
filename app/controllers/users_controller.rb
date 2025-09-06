@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [ :edit, :destroy, :update, :show ]
+  before_action :require_user, except: [ :index, :show ]
+  before_action :require_same_user, only: [ :edit, :update, :destroy ]
 
   def index
-    @users = User.paginate(page: params[:page], per_page:2)
+    @users = User.paginate(page: params[:page], per_page: 2)
   end
 
   def new
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    debugger
+    # debugger
     @user = User.new(user_params)
 
     if @user.save
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_articles = @user.articles.paginate(page: params[:page], per_page:2)
+    @user_articles = @user.articles.paginate(page: params[:page], per_page: 2)
   end
 
   private
@@ -51,5 +53,12 @@ class UsersController < ApplicationController
 
   def set_user
       @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:danger] = "You have no rights"
+      redirect_to root_path
+    end
   end
 end

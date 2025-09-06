@@ -1,0 +1,22 @@
+<%= form_with scope: :session, local: true, html: { class: "row g-3 my-4" }, data: { turbo: false }, url: login_path do |f| %>
+  <div class="mb-3 row">  
+    <%= f.label :email, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-8">
+      <%= f.email_field :email, class: "form-control", placeholder: "Enter Email", autofocus: true %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <%= f.label :password, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-8">
+      <%= f.password_field :password, class: "form-control", autocomplete: "off" %>
+    </div>
+  </div>
+
+  <!-- Submit button aligned with input fields -->
+  <div class="mb-3 row">
+    <div class="offset-sm-2 col-sm-8">
+      <%= f.submit "Log In", class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+<% end %>
