@@ -15,7 +15,7 @@
                 <%= article.user.present? ? article.user.username : "Unknown" %>, <%= time_ago_in_words(article.created_at) %> ago
               </small>
             </p>
-            <% if logged_in? && current_user == article.user %>
+            <% if logged_in? && (current_user == article.user || current_user.admin?) %>
             <div class="d-flex justify-content-end">
               <%= link_to "Edit", edit_article_path(article), class: "btn btn-sm btn-outline-warning me-2" %>
               <%= link_to "Delete", article_path(article),

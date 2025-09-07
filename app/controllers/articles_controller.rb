@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   before_action :require_same_user, only: [ :edit, :update, :destroy ]
 
   def index
-    @articles = Article.paginate(page: params[:page], per_page: 2)
+    @articles = Article.paginate(page: params[:page], per_page: 4)
   end
 
   def new
@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
     end
 
     def require_same_user
-    if current_user != @article.user
+    if current_user != @article.user and !current_user.admin?
       flash[:danger] = "You have no rights"
       redirect_to root_path
     end

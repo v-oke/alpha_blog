@@ -21,7 +21,7 @@
 
     <!-- Card Footer with Buttons on Lower-Left -->
     <div class="card-footer d-flex justify-content-start gap-2">
-      <% if logged_in? && current_user == @article.user %>
+      <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
         <%= link_to "Edit", edit_article_path(@article), class: "btn btn-sm btn-outline-warning" %>
         <%= link_to "Delete", article_path(@article),
                       data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },

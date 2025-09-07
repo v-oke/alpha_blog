@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [ :edit, :destroy, :update, :show ]
   before_action :require_user, except: [ :index, :new, :create, :show ]
-  before_action :require_same_user, only: [ :edit, :update, :destroy ]
+  before_action :require_same_user, only: [ :edit, :update ]
+  before_action :require_admin, only: [ :destroy ]
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 2)
+    @users = User.paginate(page: params[:page], per_page: 4)
   end
 
   def new
@@ -40,6 +41,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:danger] = "User has been deleted"
+    redirect_to users_path
   end
 
   def show
@@ -57,9 +62,16 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @user
+    if current_user != @user and !current_user.admin?
       flash[:danger] = "You have no rights"
       redirect_to root_path
+    end
+  end
+
+  def require_admin
+    if !current_user.admin?
+      flash[:danger] = "You have no rights, contact Admin"
+      redirect_to users_path
     end
   end
 end
