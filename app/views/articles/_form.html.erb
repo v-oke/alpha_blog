@@ -4,6 +4,8 @@
     <!-- Error messages inside grid -->
     <%= render 'shared/errors', obj: @article %>
 
+    Article by <%= @article.user.username if @article.user!=nil %>
+
     <%= form_with model: @article, local: true, html: { class: "row g-3 my-4" }, data: { turbo: false } do |f| %>
       <div class="mb-3 row">  
         <%= f.label :title, class: "col-sm-2 col-form-label" %>

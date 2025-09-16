@@ -31,7 +31,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    # debugger
     @article = Article.find(params[:id])
+    @article.user = current_user if @article.user==nil
     if @article.update(article_params)
       flash[:success] = "Article was successfully Updated"
       redirect_to article_path(@article)
