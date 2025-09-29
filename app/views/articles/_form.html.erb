@@ -21,6 +21,14 @@
         </div>
       </div>
 
+      <div class="mb-3 row">
+        <div class="offset-sm-2 col-sm-8">
+          <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+            <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
+          <% end %> 
+        </div>
+      </div>
+
       <!-- Submit button aligned with input fields -->
       <div class="mb-3 row">
         <div class="offset-sm-2 col-sm-8">

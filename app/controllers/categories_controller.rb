@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :require_admin, except: [ :show, :index ]
+  before_action :set_category, only: [ :show ]
 
   def index
     @categories = Category.paginate(page: params[:page], per_page: 4)
@@ -23,6 +24,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @category_articles = @category.articles.paginate(page: params[:page], per_page: 2)
   end
 
   private
